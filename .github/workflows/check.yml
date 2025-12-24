@@ -1,11 +1,11 @@
-name: TTP Check
+name: TTP Appointment Check
 on:
   schedule:
-    - cron: '*/10 * * * *'
-  workflow_dispatch:
+    - cron: '*/10 * * * *' # Runs every 10 mins
+  workflow_dispatch:      # Manual trigger button
 
 jobs:
-  run-scheduler:
+  check-ttp:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -15,10 +15,11 @@ jobs:
           python-version: '3.9'
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Run it safely
+      - name: Run Scheduler
         env:
-          # This pulls the secret from your settings
-          MY_SECRET_URL: ${{ secrets.DISCORD_WEBHOOK }} 
+          # This pulls from your GitHub Secrets
+          DISCORD_DATA: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
-          # The -u flag overrides the config.json and uses your secret URL
-          python ttp.py -u "$MY_SECRET_URL"
+          # The -u flag tells the script where to send the ping
+          # The -d flag is your 'before' date
+          python ttp.py -l 5446 -d "January 14, 2026" -u "discord://$DISCORD_DATA"
