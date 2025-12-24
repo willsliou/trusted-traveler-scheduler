@@ -3,5 +3,5 @@
   "location_ids": [5446],
   "notification_level": 1,
   "notification_urls": ["${{ secrets.DISCORD_WEBHOOK }}"],
-  "retrieval_interval": "10m"
+  "retrieval_interval": "5m"
 }
