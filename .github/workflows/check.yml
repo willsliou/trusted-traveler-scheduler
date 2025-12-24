@@ -22,4 +22,4 @@ jobs:
         run: |
           # The -u flag tells the script where to send the ping
           # The -d flag is your 'before' date
-          python ttp.py -l 5446 -d "January 14, 2026" -u "discord://$DISCORD_DATA"
+          python ttp.py -l 5446 -d "January 14, 2026" -u "discord://$DISCORD_DATA" -r ""
